@@ -41,6 +41,7 @@
         <jackson.version>2.20.1</jackson.version>
         <jackson.annotations.version>2.20</jackson.annotations.version>
         <org.apache.version>3.14.0</org.apache.version>
+        <hutool.json.version>5.8.32</hutool.json.version>
     </properties>
 
     <dependencyManagement>
@@ -76,6 +77,11 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
                 <version>${org.apache.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-json</artifactId>
+                <version>${hutool.json.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
