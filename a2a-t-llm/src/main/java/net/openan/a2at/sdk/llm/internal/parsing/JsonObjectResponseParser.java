@@ -9,7 +9,7 @@ import net.openan.a2at.sdk.core.json.JsonValueParser;
 /**
  * Parses JSON object payloads returned by structured LLM calls.
  *
- * @since 2026-05
+ * @since 2026-06
  */
 public final class JsonObjectResponseParser implements JsonValueParser {
 
@@ -23,7 +23,8 @@ public final class JsonObjectResponseParser implements JsonValueParser {
      */
     public Map<String, Object> parse(String payload) {
         try {
-            Map<String, Object> values = OBJECT_MAPPER.readValue(payload, new TypeReference<Map<String, Object>>() {});
+            Map<String, Object> values = OBJECT_MAPPER.readValue(payload, new TypeReference<>() {
+            });
             if (values == null) {
                 throw new SdkException("Structured LLM payload must be a JSON object.");
             }
