@@ -33,10 +33,6 @@ class LlmPackageStructureTest {
                 List.of("JsonObjectResponseParser.java"),
                 topLevelJavaFiles(root.resolve("internal").resolve("parsing")));
         assertEquals(
-                List.of("InMemoryLlmSessionStore.java", "LlmSessionStore.java"),
-                topLevelJavaFiles(root.resolve("internal").resolve("session")));
-        assertEquals(List.of("DefaultLlmClientBuilder.java"), topLevelJavaFiles(root.resolve("internal").resolve("assembly")));
-        assertEquals(
                 List.of(
                         "OpenAiSdkResponseExecutor.java",
                         "OpenAiSdkStructuredRequestMapper.java",
@@ -63,10 +59,8 @@ class LlmPackageStructureTest {
         assertTrue(Files.exists(root.resolve("model")));
         assertTrue(Files.exists(root.resolve("exception")));
         assertTrue(Files.exists(root.resolve("config")));
-        assertTrue(Files.exists(root.resolve("internal").resolve("assembly")));
         assertTrue(Files.exists(root.resolve("internal").resolve("openai")));
         assertTrue(Files.exists(root.resolve("internal").resolve("parsing")));
-        assertTrue(Files.exists(root.resolve("internal").resolve("session")));
         assertTrue(Files.exists(root.resolve("LLMClient.java")));
         assertTrue(Files.exists(root.resolve("adapter").resolve("LLMAdapter.java")));
         assertTrue(Files.exists(root.resolve("adapter").resolve("OpenAICompatibleAdapter.java")));
@@ -74,10 +68,7 @@ class LlmPackageStructureTest {
         assertTrue(Files.exists(root.resolve("model").resolve("LlmUsage.java")));
         assertTrue(Files.exists(root.resolve("model").resolve("StructuredGenerationRequest.java")));
         assertTrue(Files.exists(root.resolve("exception").resolve("LlmConfigException.java")));
-        assertTrue(Files.exists(root.resolve("internal").resolve("session").resolve("LlmSessionStore.java")));
         assertTrue(Files.exists(root.resolve("internal").resolve("parsing").resolve("JsonObjectResponseParser.java")));
-        assertTrue(Files.exists(root.resolve("internal").resolve("session").resolve("InMemoryLlmSessionStore.java")));
-        assertTrue(Files.exists(root.resolve("internal").resolve("assembly").resolve("DefaultLlmClientBuilder.java")));
         assertTrue(Files.exists(root.resolve("internal").resolve("openai").resolve("OpenAiSdkResponseExecutor.java")));
         assertTrue(Files.exists(root.resolve("internal").resolve("openai").resolve("OpenAiSdkStructuredRequestMapper.java")));
         assertTrue(Files.exists(root.resolve("internal").resolve("openai").resolve("OpenAiSdkStructuredResponseMapper.java")));
