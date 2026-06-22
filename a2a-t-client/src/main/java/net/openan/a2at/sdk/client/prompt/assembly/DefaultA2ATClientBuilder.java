@@ -17,6 +17,9 @@ import net.openan.a2at.sdk.client.prompt.orchestration.DefaultClientPromptGenera
 import net.openan.a2at.sdk.client.prompt.recognition.ClientScenarioRecognizer;
 import net.openan.a2at.sdk.core.model.A2ATConfig;
 import net.openan.a2at.sdk.llm.LLMClient;
+import net.openan.a2at.sdk.llm.LLMClientConfig;
+import net.openan.a2at.sdk.llm.LLMClientFactory;
+import net.openan.a2at.sdk.llm.LLMConfigLoader;
 import net.openan.a2at.sdk.negotiation.runtime.NegotiationHandler;
 import net.openan.a2at.sdk.negotiation.runtime.RoleBoundNegotiationOrchestrator;
 import net.openan.a2at.sdk.negotiation.store.impl.InMemoryNegotiationStore;
@@ -118,7 +121,7 @@ public final class DefaultA2ATClientBuilder {
                 newClientSlotSchemaLoader(resources, config.prompt().sourceType());
         ClientTemplateLoader templateLoader =
                 newClientTemplateLoader(resources, config.prompt().sourceType());
-        LLMClient llmClient = new LLMClient(envPath);
+        LLMClient llmClient = createLlmClient();
         String language = config.prompt().language();
         String scenarioSystemPrompt = resources.loadPrompt(SCENARIO_RECOGNITION_PROMPT, language, "system.md");
         String scenarioUserPrompt = resources.loadPrompt(SCENARIO_RECOGNITION_PROMPT, language, "user.md");
@@ -177,6 +180,23 @@ public final class DefaultA2ATClientBuilder {
             throw new UnsupportedOperationException("Unsupported negotiation state store type: "
                     + config.negotiation().stateStoreType());
         }
+    }
+
+    private LLMClient createLlmClient() {
+        LLMClientConfig loadedConfig = LLMConfigLoader.load(envPath);
+        String provider = OPENAI_COMPATIBLE_PROVIDER.equals(loadedConfig.provider()) ? "openai" : loadedConfig.provider();
+        LLMClientConfig runtimeConfig = new LLMClientConfig(
+                provider,
+                loadedConfig.model(),
+                loadedConfig.apiKey(),
+                loadedConfig.baseUrl(),
+                loadedConfig.historyWindow(),
+                loadedConfig.maxTokens(),
+                loadedConfig.temperature(),
+                loadedConfig.timeoutSeconds(),
+                loadedConfig.sessionMaxTotal(),
+                loadedConfig.sessionMaxPerProvider());
+        return LLMClientFactory.create(provider, runtimeConfig);
     }
 
     private static void require(Object value, String message) {
