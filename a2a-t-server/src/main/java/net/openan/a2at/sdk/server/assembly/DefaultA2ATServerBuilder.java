@@ -174,19 +174,7 @@ public final class DefaultA2ATServerBuilder {
 
     private LLMClient createLlmClient() {
         LLMClientConfig loadedConfig = LLMConfigLoader.load(envPath);
-        String provider = OPENAI_COMPATIBLE_PROVIDER.equals(loadedConfig.provider()) ? "openai" : loadedConfig.provider();
-        LLMClientConfig runtimeConfig = new LLMClientConfig(
-                provider,
-                loadedConfig.model(),
-                loadedConfig.apiKey(),
-                loadedConfig.baseUrl(),
-                loadedConfig.historyWindow(),
-                loadedConfig.maxTokens(),
-                loadedConfig.temperature(),
-                loadedConfig.timeoutSeconds(),
-                loadedConfig.sessionMaxTotal(),
-                loadedConfig.sessionMaxPerProvider());
-        return LLMClientFactory.create(provider, runtimeConfig);
+        return LLMClientFactory.create(loadedConfig.provider(), loadedConfig);
     }
 
 }
