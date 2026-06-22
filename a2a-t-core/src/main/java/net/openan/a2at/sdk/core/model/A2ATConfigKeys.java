@@ -34,7 +34,7 @@ public final class A2ATConfigKeys {
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static final class Llm {
 
-        /** Selects the LLM provider used by the shared client (e.g., deepseek, openai_compatible). */
+        /** Selects the LLM provider used by the shared client (e.g., openai_compatible). */
         public static final String PROVIDER = "A2AT_LLM_PROVIDER";
 
         /** Selects the default model name for the configured provider. */

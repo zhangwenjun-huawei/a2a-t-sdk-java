@@ -61,10 +61,10 @@ class LlmConfigTest {
     @Test
     void should_overrideDefaults_When_keysAreProvided() {
         Map<String, String> values = Map.of(
-                "A2AT_LLM_PROVIDER", "deepseek",
-                "A2AT_LLM_MODEL", "deepseek-chat",
+                "A2AT_LLM_PROVIDER", "example_provider",
+                "A2AT_LLM_MODEL", "example-model",
                 "A2AT_LLM_API_KEY", "test-api-key",
-                "A2AT_LLM_BASE_URL", "https://api.deepseek.com",
+                "A2AT_LLM_BASE_URL", "https://llm.example.test/v1",
                 "A2AT_LLM_HISTORY_WINDOW", "20",
                 "A2AT_LLM_MAX_TOKENS", "4096",
                 "A2AT_LLM_TEMPERATURE", "0.5",
@@ -74,10 +74,10 @@ class LlmConfigTest {
 
         LlmConfig config = LlmConfig.fromMap(values);
 
-        assertEquals("deepseek", config.provider());
-        assertEquals("deepseek-chat", config.model());
+        assertEquals("example_provider", config.provider());
+        assertEquals("example-model", config.model());
         assertEquals("test-api-key", config.apiKey());
-        assertEquals("https://api.deepseek.com", config.baseUrl());
+        assertEquals("https://llm.example.test/v1", config.baseUrl());
         assertEquals(20, config.historyWindow());
         assertEquals(4096, config.maxTokens());
         assertEquals(0.5d, config.temperature());
