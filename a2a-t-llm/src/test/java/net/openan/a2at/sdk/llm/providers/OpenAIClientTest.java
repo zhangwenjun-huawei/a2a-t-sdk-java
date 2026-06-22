@@ -21,6 +21,7 @@ import net.openan.a2at.sdk.llm.LLMResponse;
 import net.openan.a2at.sdk.llm.LLMRuntimeError;
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("deprecation")
 class OpenAIClientTest {
 
     @Test

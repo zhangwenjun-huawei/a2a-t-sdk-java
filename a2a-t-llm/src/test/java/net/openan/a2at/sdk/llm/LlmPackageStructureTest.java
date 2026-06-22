@@ -52,8 +52,21 @@ class LlmPackageStructureTest {
         assertFalse(Files.exists(root.resolve("api")));
     }
 
+    @Test
+    void llmTestsRemoveLegacyConfigInternalAndModelPackages() {
+        Path root = llmTestRoot();
+
+        assertFalse(Files.exists(root.resolve("config")));
+        assertFalse(Files.exists(root.resolve("internal")));
+        assertFalse(Files.exists(root.resolve("model")));
+    }
+
     private static Path llmRoot() {
         return Path.of("src", "main", "java", "net", "openan", "a2at", "sdk", "llm");
+    }
+
+    private static Path llmTestRoot() {
+        return Path.of("src", "test", "java", "net", "openan", "a2at", "sdk", "llm");
     }
 
     private static List<String> topLevelJavaFiles(Path path) throws IOException {
